@@ -72,7 +72,33 @@ public class BSTree implements IBSTree {
 
     @Override
     public void insertBSTNode(int key, String elem) {
+        BSTNode newNode = new BSTNode(key, elem);
+        if (root == null) {
+            root = newNode;
+        } else {
+            insertBSTNode(root, newNode);
+        }
+    }
 
+    @Override
+    public void insertBSTNode(BSTNode root, BSTNode newNode) {
+        if(newNode.key < root.key){
+            if(root.leftChild == null){
+                root.leftChild = newNode;
+                newNode.parent = root;
+            } else {
+                insertBSTNode(root.leftChild, newNode);
+            }
+        } else if (newNode.key > root.key) {
+            if (root.rightChild == null) {
+                root.rightChild = newNode;
+                newNode.parent = root;
+            } else {
+                insertBSTNode(root.rightChild, newNode);
+            }
+        } else {
+            root.elem = newNode.elem;
+        }
     }
 
     @Override

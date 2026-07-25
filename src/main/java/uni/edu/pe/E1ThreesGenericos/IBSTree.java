@@ -21,6 +21,8 @@ public interface IBSTree {
 
     public void insertBSTNode(int key, String elem);
 
+    public void insertBSTNode(BSTNode root, BSTNode newNode);
+
     public void remove(int key);
 
     public String find(int key);
