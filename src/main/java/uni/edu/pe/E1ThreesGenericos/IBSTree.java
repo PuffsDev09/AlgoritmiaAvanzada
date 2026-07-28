@@ -25,6 +25,8 @@ public interface IBSTree {
 
     public void remove(int key);
 
+    public void remove(int key, BSTNode root);
+
     public String find(int key);
 
     public String find(int key, BSTNode root);

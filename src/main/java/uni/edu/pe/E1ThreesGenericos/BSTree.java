@@ -103,7 +103,29 @@ public class BSTree implements IBSTree {
 
     @Override
     public void remove(int key) {
+        remove(key, root);
+    }
 
+    @Override
+    public void remove(int key, BSTNode root) {
+        if(root == null || this.root == null){
+            return;
+        }
+        if (key < root.key) {
+            remove(key, root.leftChild);
+        } else if ( key > root.key) {
+            remove(key, root.rightChild);
+        } else {
+            if(root.leftChild == null && root.rightChild == null) {
+                if(root.key < root.parent.key){
+                    root.parent.leftChild = null;
+                } else {
+                    root.parent.rightChild = null;
+                }
+            } else if (root.leftChild != null && root.rightChild != null) {
+
+            }
+        }
     }
 
     @Override
