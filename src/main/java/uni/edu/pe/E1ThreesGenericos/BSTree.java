@@ -3,12 +3,6 @@ package uni.edu.pe.E1ThreesGenericos;
 public class BSTree implements IBSTree {
 
     public BSTNode root;
-    public int size = 0;
-
-    @Override
-    public int getSize() {
-        return size;
-    }
 
     @Override
     public int getHeight() {
@@ -103,28 +97,58 @@ public class BSTree implements IBSTree {
 
     @Override
     public void remove(int key) {
-        remove(key, root);
+        if(root == null){
+            System.out.println("Arbol Vacio");
+        } else if (this.find(key) == null ) {
+            System.out.println("Clave no encontrada");
+        } else {
+            remove(key, root);
+        }
     }
 
     @Override
     public void remove(int key, BSTNode root) {
-        if(root == null || this.root == null){
-            return;
-        }
-        if (key < root.key) {
+
+        if(key < root.key){
             remove(key, root.leftChild);
-        } else if ( key > root.key) {
+        } else if (key > root.key){
             remove(key, root.rightChild);
         } else {
-            if(root.leftChild == null && root.rightChild == null) {
-                if(root.key < root.parent.key){
+            if(root.rightChild == null && root.leftChild == null){
+                if(key < root.parent.key){
                     root.parent.leftChild = null;
                 } else {
                     root.parent.rightChild = null;
                 }
-            } else if (root.leftChild != null && root.rightChild != null) {
-
+                root.parent = null;
+            } else if (root.rightChild == null || root.leftChild == null) {
+                boolean probate = root.rightChild == null;
+                if(key < root.parent.key) {
+                    root.parent.leftChild = probate ? root.leftChild : root.rightChild;
+                } else {
+                    root.parent.rightChild = probate ? root.leftChild : root.rightChild;
+                }
+                if(root.leftChild != null)
+                    root.leftChild.parent = root.parent;
+                else
+                    root.rightChild.parent = root.parent;
+                root.parent = null;
+            } else {
+                succes(root, root.rightChild, key);
             }
+        }
+    }
+
+    public void succes (BSTNode parent, BSTNode current, int key) {
+        if(current.leftChild == null && current.rightChild == null) {
+            parent.key = current.key;
+            parent.elem = current.elem;
+            current.parent.leftChild = null;
+            current.parent = null;
+        } else if (current.leftChild != null){
+            succes(parent, current.leftChild, key);
+        } else {
+            succes(parent, current.rightChild, key);
         }
     }
 

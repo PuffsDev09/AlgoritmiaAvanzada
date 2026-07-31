@@ -1,7 +1,6 @@
 package uni.edu.pe.E1ThreesGenericos;
 
 public interface IBSTree {
-    public int getSize();
 
     public int getHeight();
 
