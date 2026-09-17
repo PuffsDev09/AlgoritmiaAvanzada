@@ -5,6 +5,12 @@ public class UnidadEmergencia implements Operable, Identificable{
     private String nombre;
     private String estado;
 
+    public UnidadEmergencia(int id, String nombre, String estado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+    }
+
     public String getNombre() {
         return nombre;
     }

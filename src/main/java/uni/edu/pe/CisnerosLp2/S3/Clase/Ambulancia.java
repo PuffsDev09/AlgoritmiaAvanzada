@@ -4,6 +4,11 @@ public class Ambulancia extends UnidadEmergencia{
 
     private int cantidadParamedicos;
 
+    public Ambulancia(int id, String nombre, String estado, int cantidadParamedicos) {
+        super(id, nombre, estado);
+        this.cantidadParamedicos = cantidadParamedicos;
+    }
+
     public void setCantidadParamedicos(int cantidadParamedicos){
         this.cantidadParamedicos = cantidadParamedicos;
     }

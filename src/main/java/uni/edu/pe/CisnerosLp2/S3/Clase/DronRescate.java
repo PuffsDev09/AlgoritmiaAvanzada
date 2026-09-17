@@ -4,6 +4,11 @@ public class DronRescate extends UnidadEmergencia{
 
     private int autonomiaMinutos;
 
+    public DronRescate(int id, String nombre, String estado, int autonomiaMinutos) {
+        super(id, nombre, estado);
+        this.autonomiaMinutos = autonomiaMinutos;
+    }
+
     public int getAutonomiaMinutos() {
         return autonomiaMinutos;
     }

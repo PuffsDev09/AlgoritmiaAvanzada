@@ -1,0 +1,25 @@
+Respuestas de Análisis Final - Caso Unidades de Emergencia
+
+1. ¿Qué ventaja proporciona utilizar extends en este problema?
+Básicamente te ahorra repetir código (DRY). Pones los datos comunes como el id o el estado en la clase padre (UnidadEmergencia) y las hijas lo heredan de frente, enfocándose solo en lo suyo (sus propios atributos).
+
+2. ¿Qué función cumple la interfaz Operable?
+Actúa como un contrato. Obliga a que cualquier unidad que metamos al sistema sí o sí tenga los métodos clave para funcionar (iniciarMision, finalizarMision, ejecutarMision), sin importar cómo estén programados por dentro.
+
+3. ¿Dónde aparece el polimorfismo en la solución?
+Se nota clarito cuando recorremos la colección o en el método asignarMision(). Usamos una referencia general (UnidadEmergencia), llamamos a .ejecutarMision(), y cada unidad hace su chamba específica según su tipo real, sin necesidad de preguntar qué es.
+
+4. ¿Por qué una referencia común puede ejecutar comportamientos diferentes?
+Por el Dynamic Binding (Enlace Dinámico) de Java. En tiempo de ejecución, la JVM se fija en el objeto real que está en la memoria (el Dron, la Ambulancia), no en el tipo de la variable referencial, y ejecuta el método sobrescrito (@Override) que le toca.
+
+5. ¿Qué diferencia existe entre heredar comportamiento y cumplir un contrato mediante una interfaz?
+Heredar con extends es decir "esto es un" (una Ambulancia es una UnidadEmergencia) y te traes código ya implementado. Cumplir un contrato con implements es decir "esto es capaz de" (es Operable) y solo te traes las firmas de los métodos que tú mismo estás obligado a codificar.
+
+6. ¿Por qué Repositorio<T extends Identificable> necesita la restricción extends Identificable?
+Porque si no le ponemos el extends, Java asume que T es un Object cualquiera y saltaría un error de compilación al intentar usar .id() como llave para el Map. Al restringirlo, le aseguramos al compilador que el objeto sí o sí trae el método id().
+
+7. ¿Qué problema evita el uso de excepciones en lugar de devolver simplemente null?
+Te salva del clásico y odiado NullPointerException. En vez de que el programa falle en silencio o lance errores raros más adelante, lanzar una excepción (como NoEncontradoException) te obliga a manejar el error en el momento y te avisa exactamente qué salió mal.
+
+8. ¿Qué diseño representa mejor los diferentes comportamientos de las unidades sin depender de múltiples if/else?
+De lejos, el polimorfismo basado en herencia y sobrescritura de métodos. Si usas puro if/else, cuando agregues un tipo nuevo (ej. un helicóptero) vas a tener que abrir y modificar tu código viejo. Con el polimorfismo, solo creas la nueva clase, sobrescribes el método y el sistema sigue funcionando (cumpliendo el principio Open/Closed de SOLID).

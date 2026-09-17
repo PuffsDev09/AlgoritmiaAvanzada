@@ -4,6 +4,11 @@ public class UnidadBomberos extends UnidadEmergencia{
 
     private int capacidadAgua;
 
+    public UnidadBomberos(int id, String nombre, String estado, int capacidadAgua) {
+        super(id, nombre, estado);
+        this.capacidadAgua = capacidadAgua;
+    }
+
     public int getCapacidadAgua() {
         return capacidadAgua;
     }
